@@ -29,5 +29,14 @@
         "./libs/common/src/*"
       ]
     }
-  }
+  },
+  "files": [],
+  "references": [
+    {
+      "path": "./apps/stayly/tsconfig.app.json"
+    },
+    {
+      "path": "./apps/reservations/tsconfig.app.json"
+    }
+  ]
 }
