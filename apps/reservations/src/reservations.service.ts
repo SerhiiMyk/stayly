@@ -6,11 +6,11 @@ import { ReservationRepository } from './reservation.repository.js';
 @Injectable()
 export class ReservationsService {
   constructor(private reservationRepository: ReservationRepository) {}
-  create(createReservationDto: CreateReservationDto) {
+  create(createReservationDto: CreateReservationDto, userId: string) {
     return this.reservationRepository.create({
       ...createReservationDto,
       timestamp: new Date(),
-      userId: '123',
+      userId,
     });
   }
 
@@ -23,7 +23,10 @@ export class ReservationsService {
   }
 
   update(_id: string, updateReservationDto: UpdateReservationDto) {
-    return this.reservationRepository.findOneAndUpdate({ _id }, {$set:updateReservationDto});
+    return this.reservationRepository.findOneAndUpdate(
+      { _id },
+      { $set: updateReservationDto },
+    );
   }
 
   remove(_id: string) {

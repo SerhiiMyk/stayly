@@ -1,5 +1,5 @@
 import { createParamDecorator, ExecutionContext } from '@nestjs/common';
-import { UserDocument } from './users/models/user.schema.js';
+import { UserDocument } from '../../../../apps/auth/src/users/models/user.schema.js';
 
 const getCurrentUser = (ctx: ExecutionContext): UserDocument => {
   return ctx.switchToHttp().getRequest().user;
