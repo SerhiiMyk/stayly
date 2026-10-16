@@ -2,16 +2,21 @@ FROM node:alpine AS development
 
 WORKDIR /usr/src/app
 
-COPY package*.json ./
+COPY package.json ./
 COPY pnpm-lock.yaml ./
+COPY tsconfig.base.json ./
+COPY nest-cli.json ./
 
 RUN npm install -g pnpm
 
 RUN pnpm install
 
-COPY . .
+COPY apps/auth apps/auth
+COPY libs libs
 
-RUN pnpm build
+RUN cd apps/auth && pnpm install
+
+RUN pnpm exec nest build auth
 
 FROM node:alpine AS production
 
@@ -20,7 +25,7 @@ ENV NODE_ENV=${NODE_ENV}
 
 WORKDIR /usr/src/app
 
-COPY package*.json ./
+COPY package.json ./
 COPY pnpm-lock.yaml ./
 
 RUN npm install -g pnpm
