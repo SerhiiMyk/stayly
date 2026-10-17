@@ -7,6 +7,7 @@ COPY pnpm-lock.yaml ./
 COPY pnpm-workspace.yaml ./
 COPY tsconfig.base.json tsconfig.base.json
 COPY nest-cli.json nest-cli.json
+COPY rspack.config.js rspack.config.js
 COPY apps/auth/package.json apps/auth/package.json
 
 RUN npm install -g pnpm
