@@ -4,17 +4,19 @@ WORKDIR /usr/src/app
 
 COPY package.json ./
 COPY pnpm-lock.yaml ./
-COPY tsconfig.base.json ./
-COPY nest-cli.json ./
+COPY pnpm-workspace.yaml ./
+COPY tsconfig.base.json tsconfig.base.json
+COPY nest-cli.json nest-cli.json
+COPY apps/auth/package.json apps/auth/package.json
 
 RUN npm install -g pnpm
+
+RUN pnpm install
 
 COPY apps/auth apps/auth
 COPY libs libs
 
-RUN pnpm install -r
-
-RUN pnpm build auth
+RUN pnpm run build auth
 
 FROM node:alpine AS production
 
@@ -25,6 +27,8 @@ WORKDIR /usr/src/app
 
 COPY package.json ./
 COPY pnpm-lock.yaml ./
+COPY pnpm-workspace.yaml ./
+COPY apps/auth/package.json apps/auth/package.json
 
 RUN npm install -g pnpm
 
@@ -32,4 +36,4 @@ RUN pnpm install --prod
 
 COPY --from=development /usr/src/app/dist ./dist
 
-CMD ["node", "dist/apps/auth/main.js"]
+CMD ["node", "dist/apps/auth/main"]
