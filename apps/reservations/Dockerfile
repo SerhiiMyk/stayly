@@ -9,12 +9,12 @@ COPY nest-cli.json ./
 
 RUN npm install -g pnpm
 
-RUN pnpm install
-
 COPY apps/reservations apps/reservations
 COPY libs libs
 
-RUN pnpm exec nest build reservations
+RUN pnpm install -r
+
+RUN pnpm build reservations
 
 FROM node:alpine AS production
 
