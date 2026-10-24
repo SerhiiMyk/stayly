@@ -4,7 +4,12 @@ import { ReservationsController } from './reservations.controller.js';
 import { DatabaseModule } from '@app/common/database/database.module.js';
 import { ReservationRepository } from './reservation.repository.js';
 import { ReservationSchema } from './models/reservation.schema.js';
-import { AUTH_SERVICE, LoggerModule, PAYMENTS_SERVICE } from '@app/common';
+import {
+  AUTH_SERVICE,
+  HealthModule,
+  LoggerModule,
+  PAYMENTS_SERVICE,
+} from '@app/common';
 import { ConfigModule, ConfigService } from '@nestjs/config';
 import Joi from 'joi';
 import { ClientsModule, Transport } from '@nestjs/microservices';
@@ -51,6 +56,7 @@ import { ClientsModule, Transport } from '@nestjs/microservices';
         inject: [ConfigService],
       },
     ]),
+    HealthModule,
   ],
   controllers: [ReservationsController],
   providers: [ReservationsService, ReservationRepository],

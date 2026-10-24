@@ -9,6 +9,7 @@ import { ConfigModule } from '@nestjs/config';
 import Joi from 'joi';
 import { LocalStrategy } from './strategy/local.strategy.js';
 import { JwtStrategy } from './strategy/jwt.strategy.js';
+import { HealthModule } from '@app/common';
 
 @Module({
   imports: [
@@ -31,6 +32,7 @@ import { JwtStrategy } from './strategy/jwt.strategy.js';
         TCP_PORT: Joi.number().required(),
       }),
     }),
+    HealthModule,
   ],
   controllers: [AuthController],
   providers: [AuthService, LocalStrategy, JwtStrategy],
