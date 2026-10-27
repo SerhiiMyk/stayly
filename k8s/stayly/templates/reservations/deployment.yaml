@@ -15,7 +15,7 @@ spec:
         app: reservations
     spec:
       containers:
-        - image: europe-central2-docker.pkg.dev/stayly-316902/reservations/production
+        - image: 113903681878.dkr.ecr.eu-north-1.amazonaws.com/reservations:latest
           name: reservations
           env:
             - name: MONGODB_URI

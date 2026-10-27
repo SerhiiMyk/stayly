@@ -1,4 +1,3 @@
-
 apiVersion: apps/v1
 kind: Deployment
 metadata:
@@ -16,7 +15,7 @@ spec:
         app: auth
     spec:
       containers:
-        - image: europe-central2-docker.pkg.dev/stayly-316902/auth/production
+        - image: 113903681878.dkr.ecr.eu-north-1.amazonaws.com/auth:latest
           name: auth
           env:
             - name: MONGODB_URI

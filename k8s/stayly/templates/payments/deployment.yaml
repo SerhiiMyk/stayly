@@ -1,4 +1,3 @@
-
 apiVersion: apps/v1
 kind: Deployment
 metadata:
@@ -16,7 +15,7 @@ spec:
         app: payments
     spec:
       containers:
-        - image: europe-central2-docker.pkg.dev/stayly-316902/payments/production
+        - image: 113903681878.dkr.ecr.eu-north-1.amazonaws.com/payments:latest
           name: payments
           env:
             - name: PORT
