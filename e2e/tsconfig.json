@@ -11,5 +11,5 @@
     "outDir": "dist",
     "baseUrl": "."
   },
-  "include": ["specs/**/*"]
+  "include": ["specs/**/*", "jest.config.ts"]
 }
