@@ -11,8 +11,7 @@ import {
 import { ReservationsService } from './reservations.service.js';
 import { CreateReservationDto } from './dto/create-reservation.dto.js';
 import { UpdateReservationDto } from './dto/update-reservation.dto.js';
-import { JwtAuthGuard } from '@app/common/auth/index.js';
-import { CurrentUser } from '@app/common';
+import { CurrentUser, Roles, JwtAuthGuard } from '@app/common';
 import type { UserDto } from '@app/common';
 
 @Controller('reservations')
@@ -36,6 +35,7 @@ export class ReservationsController {
 
   @UseGuards(JwtAuthGuard)
   @Get(':id')
+  @Roles('Admin')
   async findOne(@Param('id') id: string) {
     return this.reservationsService.findOne(id);
   }
