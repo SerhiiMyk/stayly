@@ -1,1 +1,2 @@
-export * from './user.schema.js'
+export * from './user.entity.js';
+export * from './role.entity.js';

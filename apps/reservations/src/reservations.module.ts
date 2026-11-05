@@ -1,34 +1,31 @@
 import { Module } from '@nestjs/common';
+import * as Joi from 'joi';
 import { ReservationsService } from './reservations.service.js';
 import { ReservationsController } from './reservations.controller.js';
-import { DatabaseModule } from '@app/common/database/database.module.js';
-import { ReservationRepository } from './reservation.repository.js';
-import { ReservationSchema } from './models/reservation.schema.js';
 import {
-  AUTH_SERVICE,
-  HealthModule,
+  DatabaseModule,
   LoggerModule,
+  AUTH_SERVICE,
   PAYMENTS_SERVICE,
+  HealthModule,
 } from '@app/common';
+import { ReservationRepository } from './reservation.repository.js';
+import { Reservation } from './models/reservation.entity.js';
 import { ConfigModule, ConfigService } from '@nestjs/config';
-import Joi from 'joi';
 import { ClientsModule, Transport } from '@nestjs/microservices';
 
 @Module({
   imports: [
     DatabaseModule,
-    DatabaseModule.forFeature([
-      { name: 'ReservationDocument', schema: ReservationSchema },
-    ]),
+    DatabaseModule.forFeature([Reservation]),
     LoggerModule,
     ConfigModule.forRoot({
       isGlobal: true,
       validationSchema: Joi.object({
-        MONGODB_URI: Joi.string().required(),
         PORT: Joi.number().required(),
         AUTH_HOST: Joi.string().required(),
-        AUTH_PORT: Joi.number().required(),
         PAYMENTS_HOST: Joi.string().required(),
+        AUTH_PORT: Joi.number().required(),
         PAYMENTS_PORT: Joi.number().required(),
       }),
     }),
